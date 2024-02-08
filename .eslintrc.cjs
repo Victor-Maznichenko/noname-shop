@@ -96,7 +96,6 @@ module.exports = {
       semi: ["warn", "always"],
       "react/no-array-index-key": 0,
       "react/jsx-boolean-value": 0,
-      "prettier/prettier": 2,
       "import/no-unresolved": 0,
       "react/button-has-type": 1,
       "react/require-default-props": 0,
