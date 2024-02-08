@@ -10,7 +10,7 @@ module.exports = {
    useTabs: false,
    semi: true,
    arrowParens: "always",
-   printWidth: 100,
+   printWidth: 110,
    trailingComma: "none",
    tabWidth: 3,
    tailwindConfig: "./tailwind.config.js",
