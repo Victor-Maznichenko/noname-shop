@@ -7,13 +7,12 @@ module.exports = {
       "eslint:recommended",
       "plugin:react/recommended",
       "plugin:react-hooks/recommended",
-      "plugin:import/recommended",
       "airbnb",
       "airbnb/hooks",
       "airbnb-typescript",
-      "plugin:@typescript-eslint/recommended",
-      "plugin:@typescript-eslint/recommended-requiring-type-checking",
-      "eslint-config-prettier",
+      "plugin:jsx-a11y/recommended",
+      "plugin:import/recommended",
+      "plugin:react/jsx-runtime",
       "prettier"
    ],
    overrides: [
@@ -31,30 +30,8 @@ module.exports = {
       ecmaVersion: "latest",
       sourceType: "module"
    },
-   plugins: ["import", "react", "@stylistic/js"],
+   plugins: ["prettier", "import", "react", "@stylistic/js", "jsx-a11y"],
    rules: {
-      "@stylistic/js/indent": ["warn", 3],
-      "@stylistic/js/jsx-quotes": ["error", "prefer-double"],
-      quotes: ["error", "double"],
-      semi: ["warn", "always"],
-      "max-len": ["error", { code: 110 }],
-      "react-hooks/exhaustive-deps": 0,
-      "@typescript-eslint/no-misused-promises": 0,
-      "react/require-default-props": 0,
-      "@typescript-eslint/no-floating-promises": 0,
-      "react/prop-types": 0,
-      "react/jsx-props-no-spreading": 0,
-      "react/react-in-jsx-scope": 0,
-      "import/extensions": 0,
-      "@typescript-eslint/no-non-null-assertion": 0,
-      "import/no-extraneous-dependencies": 0,
-      "react/function-component-definition": [
-         2,
-         {
-            namedComponents: "arrow-function",
-            unnamedComponents: "arrow-function"
-         }
-      ],
       "import/order": [
          "error",
          {
@@ -111,6 +88,23 @@ module.exports = {
                order: "asc",
                caseInsensitive: true
             }
+         }
+      ],
+      "@stylistic/js/indent": ["warn", 3],
+      "@stylistic/js/jsx-quotes": ["error", "prefer-double"],
+      quotes: ["error", "double"],
+      semi: ["warn", "always"],
+      "react/no-array-index-key": 0,
+      "react/jsx-boolean-value": 0,
+      "prettier/prettier": 2,
+      "import/no-unresolved": 0,
+      "react/button-has-type": 1,
+      "react/require-default-props": 0,
+      "react/function-component-definition": [
+         2,
+         {
+            namedComponents: "arrow-function",
+            unnamedComponents: "arrow-function"
          }
       ]
    }
