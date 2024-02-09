@@ -2,17 +2,18 @@ import { useState } from "react";
 
 import { ProductCartType } from "@utils/types/models";
 
-import BlueBtn from "../ui/BlueBtn";
-import CloseBtn from "../ui/CloseBtn";
+import CartBtn from "@components/ui/Buttons/CartBtn";
+
+import CloseBtn from "../ui/Buttons/CloseBtn";
 import Icon from "../ui/Icon";
 
 import CartItems from "./CartItems";
 
 const Cart = () => {
-   const [isOpen, setIsOpen] = useState(false);
+   const [modalActive, setModalActive] = useState(false);
 
-   const toggleOpen = () => {
-      setIsOpen(!isOpen);
+   const toggleModalActive = () => {
+      setModalActive(!modalActive);
    };
 
    const products: Array<ProductCartType> = [
@@ -111,7 +112,7 @@ const Cart = () => {
    return (
       <div>
          <button
-            onClick={toggleOpen}
+            onClick={toggleModalActive}
             className="flex items-center rounded bg-white p-1.5 text-m lowercase text-blue-light"
             type="button"
          >
@@ -120,17 +121,17 @@ const Cart = () => {
          </button>
 
          <div
-            className={`${!isOpen ? "pointer-events-none opacity-0" : ""} absolute left-0 top-0 z-50 h-screen min-h-[430px] w-full bg-gray-light/85 transition-all duration-500`}
+            className={`${!modalActive ? "pointer-events-none opacity-0" : ""} absolute left-0 top-0 z-50 h-screen min-h-[430px] w-full bg-gray-light/85 transition-all duration-500`}
          >
             <div
-               className={`${!isOpen ? "translate-x-full" : ""} bg absolute right-0 top-0 flex h-full	w-full max-w-80 flex-col bg-white px-5 py-6 transition-all duration-500`}
+               className={`${!modalActive ? "translate-x-full" : ""} bg absolute right-0 top-0 flex h-full	w-full max-w-80 flex-col bg-white px-5 py-6 transition-all duration-500`}
             >
                <div className="flex items-center justify-between">
                   <div className="flex items-center text-m lowercase text-blue-light">
                      <Icon className="mr-1 fill-blue-light" name="cart" width={17} height={15} />
                      <span>Cart</span>
                   </div>
-                  <CloseBtn onClick={toggleOpen} />
+                  <CloseBtn onClick={toggleModalActive} />
                </div>
                <CartItems products={products} className="grow" />
                <div className="mb-2 flex items-center justify-between">
@@ -138,9 +139,9 @@ const Cart = () => {
                   <span className="text-xl text-gray-dark">$2196</span>
                </div>
                {products.length === 0 ? (
-                  <BlueBtn onClick={toggleOpen}>back to products</BlueBtn>
+                  <CartBtn onClick={toggleModalActive}>back to products</CartBtn>
                ) : (
-                  <BlueBtn>place an order</BlueBtn>
+                  <CartBtn>place an order</CartBtn>
                )}
             </div>
          </div>

@@ -35,52 +35,38 @@ module.exports = {
       "import/order": [
          "error",
          {
-            groups: [
-               "builtin",
-               "external",
-               "internal",
-               "parent",
-               "sibling",
-               "index",
-               "object",
-               "type"
-            ],
+            groups: ["builtin", "external", "internal", "parent", "sibling", "index", "object", "type"],
             "newlines-between": "always-and-inside-groups",
             pathGroups: [
                {
                   pattern: "@components/**",
-                  group: "external",
+                  group: "internal",
                   position: "after"
                },
                {
-                  pattern: "@helpers/**",
-                  group: "external",
-                  position: "after"
+                  pattern: "@helpers",
+                  group: "internal"
                },
                {
                   pattern: "@types/**",
-                  group: "external",
-                  position: "after"
+                  group: "internal"
                },
                {
                   pattern: "@utils/**",
-                  group: "external",
-                  position: "after"
+                  group: "internal"
                },
                {
-                  pattern: "@constants/**",
-                  group: "external",
-                  position: "after"
+                  pattern: "@constants",
+                  group: "internal"
                },
                {
                   pattern: "@styles/**",
-                  group: "external",
+                  group: "internal",
                   position: "after"
                },
                {
                   pattern: "@/**",
-                  group: "external",
-                  position: "after"
+                  group: "internal"
                }
             ],
             pathGroupsExcludedImportTypes: ["builtin"],
@@ -99,6 +85,8 @@ module.exports = {
       "import/no-unresolved": 0,
       "react/button-has-type": 1,
       "react/require-default-props": 0,
+      "react/jsx-props-no-spreading": 0,
+      "react/button-has-type": 0,
       "react/function-component-definition": [
          2,
          {

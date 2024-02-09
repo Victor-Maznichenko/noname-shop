@@ -1,6 +1,6 @@
 import useSearchQuery from "@utils/hooks/useSearchQuery";
 
-import CloseBtn from "./CloseBtn";
+import CloseBtn from "./Buttons/CloseBtn";
 import Icon from "./Icon";
 
 type Props = {

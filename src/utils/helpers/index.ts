@@ -1,6 +1,5 @@
 import { DebounceCallback } from "@utils/types/helpers";
 
-// eslint-disable-next-line import/prefer-default-export
 export function debounce<T extends any[]>(
    callback: DebounceCallback<T>,
    delay: number
@@ -14,3 +13,13 @@ export function debounce<T extends any[]>(
       }, delay);
    };
 }
+
+export const truncateText = (text: string, limit: number) => {
+   if (text.length > limit) {
+      return `${text.substring(0, limit)}`;
+   }
+   return text;
+};
+
+export const calculateOldPrice = (price: number, percentage: number) =>
+   Math.floor(price / (1 - percentage / 100));

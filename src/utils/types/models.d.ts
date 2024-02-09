@@ -8,3 +8,17 @@ export type ProductCartType = {
    discountedPrice: number;
    thumbnail: string;
 };
+
+export type ProductType = {
+   id: number;
+   title: string;
+   description: string;
+   price: number;
+   discountPercentage: number;
+   rating: number;
+   stock: number;
+   brand: string;
+   category: string;
+   thumbnail: string;
+   images: Array<string>;
+};

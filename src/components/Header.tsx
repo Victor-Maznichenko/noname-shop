@@ -10,7 +10,7 @@ const Header = () => {
    const toggleShow = () => setSearchShow(!searchShow);
 
    return (
-      <header className="mb-px bg-gray-light py-[1.125rem]">
+      <header className="bg-gray-light py-[1.125rem]">
          <div className="container mx-auto px-[15px]">
             <div className="flex items-center justify-between gap-x-2">
                <div className="relative flex w-full items-center justify-between gap-x-2 overflow-hidden">

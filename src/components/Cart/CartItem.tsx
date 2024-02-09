@@ -1,6 +1,6 @@
-import Counter from "@components/ui/Counter";
-
 import { ProductCartType } from "@utils/types/models";
+
+import Counter from "@components/ui/Counter";
 
 const CartItem = ({ product }: { product: ProductCartType }) => (
    <li className="mb-4 flex w-full justify-between gap-x-2 align-top last:mb-0">

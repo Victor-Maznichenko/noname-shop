@@ -10,22 +10,21 @@ const Categories = () => {
    const handleClick = (category: string) => setSearchParams({ category });
 
    return (
-      <Swiper slidesPerView="auto" freeMode={true} observer modules={[FreeMode]} spaceBetween={1}>
+      <Swiper slidesPerView="auto" freeMode={true} modules={[FreeMode]} spaceBetween={1}>
          {[...Array(20)].map((_, index) => {
             const activeClass =
-               currentCategory === `category ${index}` ? "bg-blue-light text-white" : "bg-white";
+               currentCategory === `category ${index}`
+                  ? "bg-blue-light text-white hover:bg-blue-light elem-list-style"
+                  : "bg-white";
 
             return (
                <SwiperSlide
-                  className="cursor-pointer"
+                  className={`${activeClass} cursor-pointer px-2 py-[0.31rem] transition-all duration-300 hover:bg-blue-light/60 hover:text-white`}
                   key={index}
                   style={{ width: "auto" }}
                   onClick={() => handleClick(`category ${index}`)}
                >
-                  <button
-                     className={`${activeClass} pointer-events-none block px-2 py-[0.31rem] text-m`}
-                     type="button"
-                  >
+                  <button className="pointer-events-none block text-m" type="button">
                      category {index}
                   </button>
                </SwiperSlide>
