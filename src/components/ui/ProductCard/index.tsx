@@ -42,7 +42,7 @@ const ProductCard = ({ product, className }: Props) => {
             />
 
             <div
-               className={`${!modalActive ? "pointer-events-none opacity-0" : ""} absolute left-0 top-0 h-full w-full bg-gray-light`}
+               className={`${!modalActive ? "pointer-events-none opacity-0" : ""} absolute left-0 top-0 z-10 h-full w-full bg-gray-light transition-all duration-300`}
             >
                <Rating className="mb-2" rating={product.rating} />
                <h4 className="mb-2">{product.title}</h4>
