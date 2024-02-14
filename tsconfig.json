@@ -23,11 +23,11 @@
 
       /* Aliases */
       "paths": {
-         "@constants": ["src/assets/constants"],
          "@styles/*": ["src/assets/styles/*"],
          "@components/*": ["src/components/*"],
          "@helpers": ["src/utils/helpers"],
-         "@types": ["src/utils/types/*"],
+         "@types": ["src/utils/types"],
+         "@redux/*": ["src/redux/*"],
          "@utils/*": ["src/utils/*"],
          "@/*": ["src/*"]
       }

@@ -5,3 +5,23 @@
 body {
    overflow-x: hidden;
 }
+
+.swiper-pagination-bullets {
+   position: absolute;
+   z-index: 5;
+   bottom: 0;
+   right: 50%;
+   transform: translateX(50%);
+   display: flex;
+   align-items: center;
+   column-gap: 13px;
+}
+.swiper-pagination-bullet {
+   background-color: #fff;
+   width: 8px;
+   height: 8px;
+   border-radius: 50%;
+   &.swiper-pagination-bullet-active {
+      background-color: #5c6970;
+   }
+}
