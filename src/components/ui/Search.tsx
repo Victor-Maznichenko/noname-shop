@@ -1,4 +1,4 @@
-import useSearchQuery from "@utils/hooks/useSearchQuery";
+import useSearch from "@utils/hooks/useSearch";
 
 import CloseBtn from "./Buttons/CloseBtn";
 import Icon from "./Icon";
@@ -9,13 +9,14 @@ type Props = {
 };
 
 const Search = ({ className, onClear }: Props) => {
-   const { value, handleValue, clearValue } = useSearchQuery(onClear);
+   const { value, handleValue, clearValue } = useSearch(onClear);
 
    return (
       <form
-         className={`${className ?? ""} flex items-center rounded bg-white pr-2 text-m text-gray-main outline outline-1 outline-transparent invalid:outline-red`}
+         className={`${className ?? ""} border-1 flex h-7 items-center rounded border border-transparent bg-white pr-2 text-m text-gray-main invalid:border-red`}
+         onSubmit={(event) => event.preventDefault()}
       >
-         <button className="flex h-7 w-7 items-center justify-center" type="button">
+         <button className="flex h-full w-7 items-center justify-center" type="button">
             <Icon className="fill-gray-main" name="search" width={17} height={17} />
          </button>
          <input
@@ -27,7 +28,7 @@ const Search = ({ className, onClear }: Props) => {
             autoComplete="off"
             maxLength={220}
             onChange={handleValue}
-            className="h-7 w-full pl-1 pr-4 outline-none"
+            className="w-full pl-1 pr-4"
          />
          <CloseBtn onClick={clearValue} />
       </form>
