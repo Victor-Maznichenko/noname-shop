@@ -1,6 +1,8 @@
 import { useState } from "react";
 
 import { calculateOldPrice } from "@helpers";
+import { addToCart } from "@redux/reducers/cartReducer";
+import { useAppDispatch } from "@redux/store";
 import { ProductType } from "@utils/types/models";
 
 import CartBtn from "../Buttons/CartBtn";
@@ -18,8 +20,11 @@ type Props = {
 };
 
 const ProductCard = ({ product, className }: Props) => {
+   const dispatch = useAppDispatch();
    const [modalActive, setModalActive] = useState(false);
+
    const toggleModalActive = () => setModalActive(!modalActive);
+   const handleClick = () => dispatch(addToCart(product));
 
    return (
       <div
@@ -46,7 +51,7 @@ const ProductCard = ({ product, className }: Props) => {
          </div>
 
          <div className="flex items-center">
-            <CartBtn className="mr-2 inline-flex items-center rounded p-1 text-s">
+            <CartBtn className="mr-2 inline-flex items-center rounded p-1 text-s" onClick={handleClick}>
                <Icon name="cart" className="mr-1 fill-white text-s" width={20} height={18} />
                <span>${product.price}</span>
             </CartBtn>

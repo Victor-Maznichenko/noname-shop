@@ -21,6 +21,7 @@ body {
    width: 8px;
    height: 8px;
    border-radius: 50%;
+   cursor: pointer;
    &.swiper-pagination-bullet-active {
       background-color: #5c6970;
    }

@@ -76,11 +76,10 @@ module.exports = {
             }
          }
       ],
-      "@stylistic/js/indent": ["warn", 3],
-      "@stylistic/js/jsx-quotes": ["error", "prefer-double"],
+      "no-plusplus": 0,
       "no-param-reassign": 0,
-      "import/no-unresolved": 0,
       semi: ["warn", "always"],
+      "import/no-unresolved": 0,
       "react/button-has-type": 0,
       quotes: ["error", "double"],
       "react/jsx-boolean-value": 0,
@@ -88,6 +87,7 @@ module.exports = {
       "react/require-default-props": 0,
       "react/jsx-props-no-spreading": 0,
       "import/prefer-default-export": 0,
+      "@stylistic/js/indent": ["warn", 3],
       "import/no-extraneous-dependencies": 0,
       "react/function-component-definition": [
          2,
@@ -95,6 +95,7 @@ module.exports = {
             namedComponents: "arrow-function",
             unnamedComponents: "arrow-function"
          }
-      ]
+      ],
+      "@stylistic/js/jsx-quotes": ["error", "prefer-double"]
    }
 };
