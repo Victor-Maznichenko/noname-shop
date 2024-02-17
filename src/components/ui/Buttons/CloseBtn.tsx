@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes } from "react";
 
-import Icon from "../Icon";
+import Icon from "@components/ui/Icon";
 
 const CloseBtn = ({ className, onClick, disabled }: ButtonHTMLAttributes<HTMLButtonElement>) => (
    <button className={`${className ?? ""}`} onClick={onClick} type="button" disabled={disabled}>

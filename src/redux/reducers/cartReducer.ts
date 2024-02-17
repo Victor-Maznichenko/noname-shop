@@ -3,11 +3,11 @@ import { ProductCartType } from "@types";
 
 import { isUndefined } from "@helpers";
 
-type CartStateType = {
+interface CartStateType {
    products: Array<ProductCartType>;
    totalPrice: number;
    isCartOpen: boolean;
-};
+}
 
 const initialState: CartStateType = {
    products: [],

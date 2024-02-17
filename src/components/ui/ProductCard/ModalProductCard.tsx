@@ -1,8 +1,7 @@
 import { ProductType } from "@types";
 
-import TextBtn from "../Buttons/TextBtn";
-
-import Rating from "./Rating";
+import TextBtn from "@components/ui/Buttons/TextBtn";
+import Rating from "@components/ui/ProductCard/Rating";
 
 type Props = {
    modalActive: boolean;

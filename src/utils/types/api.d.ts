@@ -1,14 +1,14 @@
 import { ProductType } from "@types";
 
-export type ProductsApiResponse = {
+export interface ProductsApiResponse {
    products: Array<ProductType>;
    total: number;
    limit: number;
-};
+}
 
-export type ProductsParamsType = {
+export interface ProductsParamsType {
    searchTerm?: string;
    category?: string;
    limit?: number;
    skip?: number;
-};
+}
