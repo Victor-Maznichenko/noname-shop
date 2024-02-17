@@ -5,8 +5,8 @@ import { addToCart } from "@redux/reducers/cartReducer";
 import { useAppDispatch } from "@redux/store";
 import { ProductType } from "@utils/types/models";
 
-import CartBtn from "../Buttons/CartBtn";
-import Icon from "../Icon";
+import CartBtn from "@components/ui/Buttons/CartBtn";
+import Icon from "@components/ui/Icon";
 
 import ModalProductCard from "./ModalProductCard";
 import PreviewSlider from "./PreviewSlider";

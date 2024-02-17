@@ -5,9 +5,7 @@ import { useAppDispatch } from "@redux/store";
 
 const LoadMoreBtn = ({ className }: ButtonHTMLAttributes<HTMLButtonElement>) => {
    const dispatch = useAppDispatch();
-   const handleClick = () => {
-      dispatch(setProductsLoading(true));
-   };
+   const handleClick = () => dispatch(setProductsLoading(true));
 
    return (
       <button

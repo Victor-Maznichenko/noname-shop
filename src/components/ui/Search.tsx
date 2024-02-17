@@ -1,7 +1,7 @@
 import useSearch from "@utils/hooks/useSearch";
 
-import CloseBtn from "./Buttons/CloseBtn";
-import Icon from "./Icon";
+import CloseBtn from "@components/ui/Buttons/CloseBtn";
+import Icon from "@components/ui/Icon";
 
 type Props = {
    className: string;
@@ -16,7 +16,12 @@ const Search = ({ className, onClear }: Props) => {
          className={`${className ?? ""} border-1 flex h-7 items-center rounded border border-transparent bg-white pr-2 text-m text-gray-main invalid:border-red`}
          onSubmit={(event) => event.preventDefault()}
       >
-         <button className="flex h-full w-7 items-center justify-center" name="searchBtn" type="button">
+         <button
+            className="flex h-full w-7 items-center justify-center"
+            name="searchBtn"
+            aria-label="Search button"
+            type="button"
+         >
             <Icon className="fill-gray-main" name="search" width={17} height={17} />
          </button>
          <input

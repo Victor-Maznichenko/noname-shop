@@ -2,16 +2,6 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { BASE_URL } from "@utils/constants";
 
-export interface INewsItem {
-   sys: {
-      id: string;
-   };
-   title: string;
-   cover: {
-      url: string;
-   };
-}
-
 interface CategoriesState {
    categories: Array<string>;
    currentCategory: string;

@@ -1,6 +1,6 @@
 import { truncateText } from "@helpers";
 
-import TextBtn from "../Buttons/TextBtn";
+import TextBtn from "@components/ui/Buttons/TextBtn";
 
 type Props = {
    className?: string;

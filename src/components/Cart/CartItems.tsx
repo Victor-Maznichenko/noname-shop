@@ -1,11 +1,11 @@
 import { ProductCartType } from "@utils/types/models";
 
-import CartItem from "./CartItem";
+import CartItem from "@components/Cart/CartItem";
 
-type CartItemsType = {
+interface CartItemsType {
    className: string;
    products: Array<ProductCartType>;
-};
+}
 
 const CartItems = ({ className, products }: CartItemsType) => (
    <div className={`${className ?? ""} scrollbar-mini mb-11 mr-[-1rem] mt-9 overflow-y-auto pr-1`}>

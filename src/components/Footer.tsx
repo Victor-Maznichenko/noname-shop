@@ -1,4 +1,4 @@
-import Icon from "./ui/Icon";
+import Icon from "@components/ui/Icon";
 
 const Footer = () => {
    const currentYear = new Date().getFullYear();
