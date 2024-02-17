@@ -28,7 +28,7 @@ const ProductCard = ({ product, className }: Props) => {
 
    return (
       <div
-         className={`${className ?? ""} flex h-full flex-col justify-between bg-gray-light p-4 text-s text-gray-dark`}
+         className={`${className ?? ""} flex h-full flex-col justify-between bg-gray-light p-1 text-s text-gray-dark sm:p-4`}
       >
          <div className="relative">
             <Sale discountPercentage={product.discountPercentage} />

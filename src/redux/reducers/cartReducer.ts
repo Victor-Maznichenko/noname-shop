@@ -6,11 +6,13 @@ import { isUndefined } from "@helpers";
 type CartStateType = {
    products: Array<ProductCartType>;
    totalPrice: number;
+   isCartOpen: boolean;
 };
 
 const initialState: CartStateType = {
    products: [],
-   totalPrice: 0
+   totalPrice: 0,
+   isCartOpen: false
 };
 
 const cartSlice = createSlice({
@@ -61,10 +63,18 @@ const cartSlice = createSlice({
             state.totalPrice -= state.products[indexProductFound].price;
             state.products.splice(indexProductFound, 1);
          }
+      },
+      toggleIsOpenCart: (state) => {
+         state.isCartOpen = !state.isCartOpen;
       }
    }
 });
 
 export default cartSlice.reducer;
-export const { addToCart, removeFromCart, incrementQuantityProduct, decrementQuantityProduct } =
-   cartSlice.actions;
+export const {
+   addToCart,
+   removeFromCart,
+   toggleIsOpenCart,
+   incrementQuantityProduct,
+   decrementQuantityProduct
+} = cartSlice.actions;
