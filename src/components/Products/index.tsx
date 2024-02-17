@@ -1,3 +1,5 @@
+import { ProductType } from "@types";
+
 import useProducts from "@utils/hooks/useProducts";
 
 import ProductCard from "@components/ui/ProductCard";
@@ -11,7 +13,7 @@ const Products = ({ className }: { className?: string }) => {
    return (
       <main className={`${className ?? ""} text-center`}>
          <ul className="grid grid-cols-products content-stretch justify-center gap-px text-left">
-            {products.map((product) => (
+            {products.map((product: ProductType) => (
                <li key={product.id}>
                   <ProductCard className="h-full" product={product} />
                </li>

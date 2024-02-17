@@ -10,7 +10,7 @@ const PreviewSlider = ({ images }: { images: Array<string> }) =>
                key={index}
                style={{ width: "auto" }}
             >
-               <img className="max-h-full max-w-full" src={image} loading="lazy" alt="" />
+               <img className="max-h-full max-w-full" src={image} alt="" />
             </SwiperSlide>
          ))}
       </Swiper>
