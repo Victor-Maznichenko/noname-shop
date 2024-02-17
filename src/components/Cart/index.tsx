@@ -1,22 +1,17 @@
-import { useState } from "react";
+import { toggleIsOpenCart } from "@redux/reducers/cartReducer";
+import { useAppDispatch, useAppSelector } from "@redux/store";
 
-import { useAppSelector } from "@redux/store";
-
-import ModalCart from "@components/Cart/ModalCart";
 import Icon from "@components/ui/Icon";
 
 const Cart = () => {
    const { products } = useAppSelector((state) => state.cart);
-   const [modalActive, setModalActive] = useState(false);
-
-   const toggleModalActive = () => {
-      setModalActive(!modalActive);
-   };
+   const dispatch = useAppDispatch();
+   const toggleOpenCart = () => dispatch(toggleIsOpenCart());
 
    return (
       <div>
          <button
-            onClick={toggleModalActive}
+            onClick={toggleOpenCart}
             className={`${products.length ? "bg-blue-light text-white" : "bg-white text-blue-light"} relative flex items-center rounded p-1.5 text-m lowercase transition-all`}
             type="button"
          >
@@ -31,8 +26,6 @@ const Cart = () => {
                {products.length ? products.length : ""}
             </span>
          </button>
-
-         <ModalCart modalActive={modalActive} toggleModalActive={toggleModalActive} />
       </div>
    );
 };

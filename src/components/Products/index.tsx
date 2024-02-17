@@ -12,10 +12,10 @@ const Products = ({ className }: { className?: string }) => {
 
    return (
       <main className={`${className ?? ""} text-center`}>
-         <ul className="grid grid-cols-products content-stretch justify-center gap-px text-left">
+         <ul className="grid grid-cols-1 content-stretch justify-center gap-3 text-left sm:grid-cols-2 sm:gap-px lg:grid-cols-3 xl:grid-cols-products">
             {products.map((product: ProductType) => (
-               <li key={product.id}>
-                  <ProductCard className="h-full" product={product} />
+               <li className="max-w-full" key={product.id}>
+                  <ProductCard className="h-full py-5" product={product} />
                </li>
             ))}
             {isLoading && <ProductCardsSkeleton count={limit} />}
