@@ -1,6 +1,6 @@
 # Noname Shop 🛍️🏷️
 
-## ⚙️ Technologies
+## ⚙️ Технологии
 
 <table width='100%'>
   <tr>
@@ -44,50 +44,50 @@
    </tr> 
 </table>
 
-#### Justification of the choice of such technologies (preliminary, technologies may change):
+#### Обоснование выбора таких технологий:
 
--  I decided to write without Next.js on pure React, although for marketplace SEO it is important, it provides a lot of optimization of images and fonts. But with Next.js because I'm not so smart yet, I may not meet the deadline.
--  Has built-in optimization of fonts, images and scripts.
--  TailwindCSS for faster development.
--  Swiper to implement slider in product cards.
--  React Hook form tiny, productive library for easy work with forms. It may serve well for further scaling of the project.
--  Framer Motion for animations (if we can make basic functionality)
--  Eslint, Prettier are used to check code quality and keep code clean.
--  Husky & Lint-staged: To not let 💩 slip into the codebase :D
+-  Я решил писать без Next.js на чистом React, хотя для интернет-магазинов SEO важеная состовляющая, он под капотом оптимизирует шрифты изображения и скрипты. Но Next.js, поскольку я еще не настолько умен, я могу не уложиться в сроки.
+-  Redux Toolkit для создания централизованного хранилища состояния доступного из любого компонента.
+-  Redux Persist для упрощения работы с localstorage
+-  TailwindCSS для ускорения разработки и чтобы показать что я знаю эту технологию =).
+-  React Loading Skeleton чтобы упростить создание загрузочных прелоадеров.
+-  Swiper для реализации слайдера в карточках товаров и списке категорий.
+-  Eslint, Prettier используются для проверки качества кода и поддержания его в чистоте.
+-  Husky и Lint-staged: Чтобы не дать 💩 проскользнуть в кодовую базу :D
 
-## ✧˖°. Setup project:
+## ✧˖°. Установка проекта:
 
-1. Clone the repository
+1. Клонировать репозиторий
 
    ```bash
    git clone https://github.com/Victor-Maznichenko/noname-shop.git
    cd noname-shop
    ```
 
-2. Install dependencies
+2. Установить зависимости
    ```shell
    npm install
    ```
 
-### Compiles and hot-reloads for development
+### Компиляция и горячая загрузка для разработки
 
 ```
 npm run dev
 ```
 
-### Compiles and minifies for production
+### Компиляция и минификация для продакшена
 
 ```
 npm run build
 ```
 
-### Format the code
+### Форматировать код
 
 ```
 npm run format
 ```
 
-### Find syntax errors in the code
+### Найти синтаксические ошибки в коде
 
 ```
 npm run lint
