@@ -13,8 +13,6 @@ const PreviewSlider = ({ images }: { images: Array<string> }) =>
                <img
                   src={image}
                   className="max-h-full max-w-full"
-                  width={288}
-                  height={288}
                   loading="lazy"
                   alt=""
                />
