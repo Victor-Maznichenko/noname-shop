@@ -1,15 +1,8 @@
-import { DebounceCallback } from "@utils/types/helpers";
+export const debounce = (func: (...args: unknown[]) => void, delay = 300) => {
+  let timer: NodeJS.Timeout;
 
-export function debounce<T extends unknown[]>(
-   callback: DebounceCallback<T>,
-   delay: number
-): (...args: T) => void {
-   let timer: ReturnType<typeof setTimeout>;
-
-   return (...args: T) => {
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-         callback(...args);
-      }, delay);
-   };
-}
+  return function () {
+    clearTimeout(timer);
+    timer = setTimeout(() => func(), delay);
+  };
+};

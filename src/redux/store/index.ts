@@ -10,26 +10,26 @@ import productsReducer from "@redux/reducers/productsReducer";
 import { handleStorageEvent } from "@utils/helpers/handleStorageEvent";
 
 export const persistConfig = {
-   key: "root",
-   whitelist: ["cart"],
-   storage
+  key: "root",
+  whitelist: ["cart"],
+  storage,
 };
 
 const reducers = combineReducers({
-   products: productsReducer,
-   categories: categoriesReducer,
-   cart: cartReducer
+  products: productsReducer,
+  categories: categoriesReducer,
+  cart: cartReducer,
 });
 
 export const store = configureStore({
-   reducer: persistReducer(persistConfig, reducers),
-   middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware({
-         serializableCheck: {
-            ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
-         }
-      }),
-   devTools: true
+  reducer: persistReducer(persistConfig, reducers),
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
+  devTools: true,
 });
 
 window.addEventListener("storage", handleStorageEvent, false);
