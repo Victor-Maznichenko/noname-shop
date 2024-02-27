@@ -3,59 +3,59 @@
 @tailwind utilities;
 
 @layer base {
-   html {
-      font-family: "Inter", system-ui, sans-serif;
-   }
+  html {
+    font-family: "Inter", system-ui, sans-serif;
+  }
 }
 
 @layer utilities {
-   .scrollbar::-webkit-scrollbar {
-      width: 20px;
-      height: 20px;
-   }
+  .scrollbar::-webkit-scrollbar {
+    width: 20px;
+    height: 20px;
+  }
 
-   .scrollbar::-webkit-scrollbar-track {
-      border-radius: 100vh;
-      background: #f7f4ed;
-   }
+  .scrollbar::-webkit-scrollbar-track {
+    border-radius: 100vh;
+    background: #f7f4ed;
+  }
 
-   .scrollbar::-webkit-scrollbar-thumb {
-      background: #e0cbcb;
-      border-radius: 100vh;
-      border: 3px solid #f6f7ed;
-   }
+  .scrollbar::-webkit-scrollbar-thumb {
+    background: #e0cbcb;
+    border-radius: 100vh;
+    border: 3px solid #f6f7ed;
+  }
 
-   .scrollbar-hide::-webkit-scrollbar {
-      display: none;
-   }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 
-   .scrollbar-mini::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
-   }
+  .scrollbar-mini::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
 
-   .scrollbar-mini::-webkit-scrollbar-track {
-      border-radius: 100vh;
-      background: silver;
-   }
+  .scrollbar-mini::-webkit-scrollbar-track {
+    border-radius: 100vh;
+    background: silver;
+  }
 
-   .scrollbar-mini::-webkit-scrollbar-thumb {
-      background: black;
-      border-radius: 100vh;
-      border: 1px solid silver;
-   }
+  .scrollbar-mini::-webkit-scrollbar-thumb {
+    background: black;
+    border-radius: 100vh;
+    border: 1px solid silver;
+  }
 
-   .elem-list-style {
-      display: flex;
-      align-items: center;
-      position: relative;
-      &::before {
-         content: "";
-         background-color: white;
-         border-radius: 50%;
-         margin-right: 0.25rem;
-         height: 0.375rem;
-         width: 0.375rem;
-      }
-   }
+  .elem-list-style {
+    display: flex;
+    align-items: center;
+    position: relative;
+    &::before {
+      content: "";
+      background-color: white;
+      border-radius: 50%;
+      margin-right: 0.25rem;
+      height: 0.375rem;
+      width: 0.375rem;
+    }
+  }
 }

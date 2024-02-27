@@ -1,0 +1,101 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint/eslint-plugin", "prettier", "import", "react"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react/jsx-runtime",
+    "plugin:react-hooks/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ],
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/quotes": [
+      "error",
+      "double",
+      {
+        "avoidEscape": true,
+        "allowTemplateLiterals": true
+      }
+    ],
+    "no-trailing-spaces": [2, { "skipBlankLines": false }],
+    "no-multiple-empty-lines": ["error", { "max": 1, "maxBOF": 1 }],
+    "object-curly-spacing": ["error", "always"],
+    "comma-spacing": [2, { "before": false, "after": true }],
+    "arrow-spacing": ["error", { "before": true, "after": true }],
+    "space-infix-ops": ["error", { "int32Hint": false }],
+    "space-after-keywords": "off",
+    "keyword-spacing": [2, { "before": true, "after": true }],
+    "react/jsx-indent": [2, 2, { "indentLogicalExpressions": true }],
+    "arrow-body-style": ["error", "as-needed"],
+    "padded-blocks": ["error", "never"],
+    "semi": ["error", "always"],
+    "max-len": ["error", { "code": 120 }],
+    "indent": ["error", 2],
+    "react/self-closing-comp": [
+      "error",
+      {
+        "component": true,
+        "html": true
+      }
+    ],
+    "react/jsx-tag-spacing": ["error", { "beforeSelfClosing": "always" }],
+    "import/order": [
+      "error",
+      {
+        "groups": ["builtin", "external", "internal", "parent", "sibling", "index", "object", "type"],
+        "newlines-between": "always-and-inside-groups",
+        "pathGroups": [
+          {
+            "pattern": "@components/**",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "@helpers",
+            "group": "internal"
+          },
+          {
+            "pattern": "@types/**",
+            "group": "internal"
+          },
+          {
+            "pattern": "@redux/**",
+            "group": "internal"
+          },
+          {
+            "pattern": "@utils/**",
+            "group": "internal"
+          },
+          {
+            "pattern": "@styles/**",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "@/**",
+            "group": "internal"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["builtin"],
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ]
+  }
+}
