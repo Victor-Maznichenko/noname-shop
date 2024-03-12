@@ -6,22 +6,24 @@ import { useAppDispatch } from "@redux/store";
 
 import useCurrentCategory from "./useCurrentCategory";
 
+type HandleSearchType = (searchTerm: string) => void;
+
 const useSearch = (onClear?: () => void) => {
   const [value, setValue] = useState("");
   const { changeCurrentCategory } = useCurrentCategory();
   const dispatch = useAppDispatch();
 
-  const handleSearch = useMemo(
+  const handleSearch = useMemo<HandleSearchType>(
     () =>
-      debounce(() => {
-        dispatch(setSearchTerm(value));
+      debounce(searchTerm => {
+        dispatch(setSearchTerm(searchTerm));
       }, 300),
     [dispatch]
   );
 
   const handleValue = ({ target }: ChangeEvent<HTMLInputElement>) => {
     if (value.length < 3) changeCurrentCategory("all");
-    else handleSearch();
+    else handleSearch(value);
 
     dispatch(setSearchTerm(""));
     setValue(target.value);

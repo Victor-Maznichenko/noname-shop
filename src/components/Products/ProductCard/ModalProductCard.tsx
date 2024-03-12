@@ -1,7 +1,7 @@
 import { ProductType } from "@types";
 
+import Rating from "@components/Products/ProductCard/Rating";
 import TextBtn from "@components/ui/Buttons/TextBtn";
-import Rating from "@components/ui/ProductCard/Rating";
 
 interface ModalProductCardProps {
   modalActive: boolean;
