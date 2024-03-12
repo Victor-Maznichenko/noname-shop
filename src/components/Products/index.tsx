@@ -2,7 +2,7 @@ import { ProductType } from "@types";
 
 import useProducts from "@utils/hooks/useProducts";
 
-import ProductCard from "@components/ui/ProductCard";
+import ProductCard from "@components/Products/ProductCard";
 import { ProductCardsSkeleton } from "@components/ui/Skeletons";
 
 import LoadMoreBtn from "./LoadMoreBtn";
