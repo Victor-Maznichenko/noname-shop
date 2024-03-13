@@ -1,10 +1,11 @@
 import { ProductType } from "@types";
 
 import { useEffect, useRef, useState } from "react";
-import { useInView } from "react-intersection-observer";
 
 import { clearProducts, getProducts, setProductsLoading } from "@redux/reducers/productsReducer";
 import { useAppDispatch, useAppSelector } from "@redux/store";
+
+import useInView from "@utils/hooks/useInView";
 
 import ProductCard from "@components/Products/ProductCard";
 import { ProductCardsSkeleton } from "@components/ui/Skeletons";
@@ -13,15 +14,12 @@ import LoadMoreBtn from "./LoadMoreBtn";
 
 const Products = ({ className }: { className?: string }) => {
   const countRendersRef = useRef(1);
+  const { inView, ref } = useInView();
 
   const { isLoading, limit, total, searchTerm, isError, products } = useAppSelector(state => state.products);
   const { currentCategory } = useAppSelector(state => state.categories);
   const [currentPage, setCurrentPage] = useState(0);
   const dispatch = useAppDispatch();
-  const { ref, inView } = useInView({
-    threshold: 1,
-    triggerOnce: true,
-  });
 
   // When changing the category, clear products, set the current page number to 0
   useEffect(() => {
@@ -54,7 +52,7 @@ const Products = ({ className }: { className?: string }) => {
 
   return (
     <main className={`${className ?? ""} text-center`}>
-      <b className="absolute right-0 top-0 z-40">{inView}</b>
+      <b className="fixed right-0 top-0 z-40">{String(inView)}</b>
       <ul
         // eslint-disable-next-line max-len
         className="grid grid-cols-1 content-stretch justify-center gap-3 text-left sm:grid-cols-2 sm:gap-px lg:grid-cols-3 xl:grid-cols-products"

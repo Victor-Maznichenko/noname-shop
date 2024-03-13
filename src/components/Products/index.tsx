@@ -54,7 +54,7 @@ const Products = ({ className }: { className?: string }) => {
 
   return (
     <main className={`${className ?? ""} text-center`}>
-      <b className="absolute right-0 top-0 z-40">{inView}</b>
+      <b className="fixed right-0 top-0 z-40">{String(inView)}</b>
       <ul
         // eslint-disable-next-line max-len
         className="grid grid-cols-1 content-stretch justify-center gap-3 text-left sm:grid-cols-2 sm:gap-px lg:grid-cols-3 xl:grid-cols-products"
