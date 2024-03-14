@@ -1,10 +1,11 @@
 import { ProductType } from "@types";
 
 import { useEffect, useRef, useState } from "react";
-import { useInView } from "react-intersection-observer";
 
 import { clearProducts, getProducts, setProductsLoading } from "@redux/reducers/productsReducer";
 import { useAppDispatch, useAppSelector } from "@redux/store";
+
+import useInView from "@utils/hooks/useInView";
 
 import ProductCard from "@components/Products/ProductCard";
 import { ProductCardsSkeleton } from "@components/ui/Skeletons";
@@ -13,15 +14,12 @@ import LoadMoreBtn from "./LoadMoreBtn";
 
 const Products = ({ className }: { className?: string }) => {
   const countRendersRef = useRef(1);
+  const { inView, setElement } = useInView();
 
   const { isLoading, limit, total, searchTerm, isError, products } = useAppSelector(state => state.products);
   const { currentCategory } = useAppSelector(state => state.categories);
   const [currentPage, setCurrentPage] = useState(0);
   const dispatch = useAppDispatch();
-  const { ref, inView } = useInView({
-    threshold: 1,
-    triggerOnce: true,
-  });
 
   // When changing the category, clear products, set the current page number to 0
   useEffect(() => {
@@ -60,7 +58,7 @@ const Products = ({ className }: { className?: string }) => {
         className="grid grid-cols-1 content-stretch justify-center gap-3 text-left sm:grid-cols-2 sm:gap-px lg:grid-cols-3 xl:grid-cols-products"
       >
         {products.map((product: ProductType, index: number) => {
-          const productRef = index === products.length - 1 ? ref : null;
+          const productRef = index === products.length - 1 && !isLoading ? setElement : null;
           return (
             <li className="max-w-full" ref={productRef} key={product.id}>
               <ProductCard className="h-full py-5" product={product} />

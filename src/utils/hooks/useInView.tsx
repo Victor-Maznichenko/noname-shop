@@ -1,32 +1,24 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 const useInView = () => {
-  const ref = useRef(null);
+  const [element, setElement] = useState<null | HTMLElement>(null);
   const [inView, setInView] = useState(false);
 
-  const callback: IntersectionObserverCallback = (entries, observer) => {
-    const entry = entries[0];
-
-    if (entry.isIntersecting) {
-      observer.unobserve(entry.target);
-      setInView(true);
-      console.log(entry);
-    }
+  const callback: IntersectionObserverCallback = entries => {
+    entries.forEach(entry => {
+      setInView(entry.isIntersecting);
+    });
   };
 
   useEffect(() => {
     const observer = new IntersectionObserver(callback);
-    const currentRef = ref.current;
-    console.log("Update");
 
-    if (currentRef) observer.observe(currentRef);
+    if (element) observer.observe(element);
 
-    return () => {
-      if (currentRef) observer.unobserve(currentRef);
-    };
-  }, [ref]);
+    return () => observer.disconnect();
+  }, [element]);
 
-  return { ref, inView };
+  return { inView, setElement };
 };
 
 export default useInView;
