@@ -5,17 +5,13 @@ const PreviewSlider = ({ images }: { images: Array<string> }) =>
   images.length > 1 ? (
     <Swiper className="pb-3" pagination={true} modules={[Pagination]}>
       {images.map((image, index) => (
-        <SwiperSlide
-          className="flex h-72 w-full items-center justify-center"
-          key={index}
-          style={{ width: "auto" }}
-        >
-          <img src={image} className="max-h-full max-w-full" loading="lazy" alt="" />
+        <SwiperSlide className="h-72 w-full" key={index} style={{ width: "auto" }}>
+          <img src={image} className="h-72 w-full object-contain object-center" loading="lazy" alt="" />
         </SwiperSlide>
       ))}
     </Swiper>
   ) : (
-    <img className="h-72 w-full" src={images[0]} alt="" />
+    <img className="h-72 w-full object-contain object-center" src={images[0]} alt="" />
   );
 
 export default PreviewSlider;
