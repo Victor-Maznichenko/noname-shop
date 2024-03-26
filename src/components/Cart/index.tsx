@@ -1,17 +1,17 @@
-import { toggleIsOpenCart } from "@redux/reducers/cartReducer";
-import { useAppDispatch, useAppSelector } from "@redux/store";
+import { useUnit } from "effector-react";
+
+import { $cartProducts, openCart } from "@/effector/cart";
 
 import Icon from "@components/ui/Icon";
 
 const Cart = () => {
-  const { products } = useAppSelector(state => state.cart);
-  const dispatch = useAppDispatch();
-  const toggleOpenCart = () => dispatch(toggleIsOpenCart());
+  const products = useUnit($cartProducts);
+  const openCartEvent = useUnit(openCart);
 
   return (
     <div>
       <button
-        onClick={toggleOpenCart}
+        onClick={openCartEvent}
         // eslint-disable-next-line max-len
         className={`${products.length ? "bg-blue-light text-white" : "bg-white text-blue-light"} relative flex items-center rounded p-1.5 text-m lowercase transition-all`}
         type="button"

@@ -1,7 +1,8 @@
+import { useUnit } from "effector-react";
 import { useEffect } from "react";
 
-import { toggleIsOpenCart } from "@redux/reducers/cartReducer";
-import { useAppDispatch, useAppSelector } from "@redux/store";
+import { $isCartOpen, closeCart } from "@/effector/cart";
+import { $products } from "@/effector/products";
 
 import CartItems from "@components/Cart/CartItems";
 import CartBtn from "@components/ui/Buttons/CartBtn";
@@ -9,9 +10,9 @@ import CloseBtn from "@components/ui/Buttons/CloseBtn";
 import Icon from "@components/ui/Icon";
 
 const ModalCart = () => {
-  const { products, totalPrice, isCartOpen } = useAppSelector(state => state.cart);
-  const dispatch = useAppDispatch();
-  const toggleCartActive = () => dispatch(toggleIsOpenCart());
+  const products = useUnit($products);
+  const closeCartEvent = useUnit(closeCart);
+  const isCartOpen = useUnit($isCartOpen);
 
   useEffect(() => {
     if (isCartOpen) document.body.style.overflowY = "hidden";
@@ -34,7 +35,7 @@ const ModalCart = () => {
             <Icon className="mr-1 fill-blue-light" name="cart" width={17} height={15} />
             <span>Cart</span>
           </div>
-          <CloseBtn onClick={toggleCartActive} />
+          <CloseBtn onClick={closeCartEvent} />
         </div>
         <CartItems products={products} className="grow" />
         <div className="mb-2 flex items-center justify-between">

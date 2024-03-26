@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import Cart from "@components/Cart";
+// import Cart from "@components/Cart";
 import Categories from "@components/ui/Categories";
 import Icon from "@components/ui/Icon";
 import Search from "@components/ui/Search";
@@ -24,7 +24,7 @@ const Header = () => {
               onClear={toggleShow}
             />
           </div>
-          <Cart />
+          {/* <Cart /> */}
         </div>
       </div>
     </header>

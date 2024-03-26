@@ -1,15 +1,30 @@
+import { useUnit } from "effector-react";
+import { useEffect } from "react";
 import { FreeMode, Mousewheel } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import "swiper/css";
-import useCategories from "@utils/hooks/useCategories";
-import useCurrentCategory from "@utils/hooks/useCurrentCategory";
+import {
+  $currentCategory,
+  $categories,
+  updateCategoriesFx,
+  updateCategory,
+} from "@/effector/categories";
 
 import { CategoriesSkeleton } from "./Skeletons";
 
+import "swiper/css";
+
 const Categories = () => {
-  const { isLoading, categories } = useCategories();
-  const { currentCategory, changeCurrentCategory } = useCurrentCategory();
+  const categories = useUnit($categories);
+  const currentCategory = useUnit($currentCategory);
+  const changeCategoryEvent = useUnit(updateCategory);
+  const updateCategories = useUnit(updateCategoriesFx);
+  const isLoading = useUnit(updateCategoriesFx.pending);
+
+  console.log(categories);
+  useEffect(() => {
+    updateCategories();
+  }, [updateCategories]);
 
   return (
     <>
@@ -34,7 +49,7 @@ const Categories = () => {
                 className={`${activeClass} cursor-pointer px-2 py-[0.31rem] transition-all duration-300 hover:bg-blue-light/60 hover:text-white`}
                 key={category}
                 style={{ width: "auto" }}
-                onClick={() => changeCurrentCategory(category)}
+                onClick={() => changeCategoryEvent(category)}
               >
                 <button className="pointer-events-none block text-m" type="button">
                   {category}

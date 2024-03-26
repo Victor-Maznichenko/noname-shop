@@ -1,54 +1,37 @@
 import { ProductType } from "@types";
+import { useUnit } from "effector-react";
+import { useEffect } from "react";
 
-import { useEffect, useRef, useState } from "react";
-
-import { clearProducts, getProducts, setProductsLoading } from "@redux/reducers/productsReducer";
-import { useAppDispatch, useAppSelector } from "@redux/store";
-
+import { $limit, $page, $products, nextPage, updateProductsFx } from "@/effector/products";
 import useInView from "@utils/hooks/useInView";
 
 import ProductCard from "@components/Products/ProductCard";
 import { ProductCardsSkeleton } from "@components/ui/Skeletons";
 
-import LoadMoreBtn from "./LoadMoreBtn";
+// import LoadMoreBtn from "./LoadMoreBtn";
 
 const Products = ({ className }: { className?: string }) => {
-  const countRendersRef = useRef(1);
   const { inView, setElement } = useInView();
 
-  const { isLoading, limit, total, searchTerm, isError, products } = useAppSelector(state => state.products);
-  const { currentCategory } = useAppSelector(state => state.categories);
-  const [currentPage, setCurrentPage] = useState(0);
-  const dispatch = useAppDispatch();
+  const page = useUnit($page);
+  const limit = useUnit($limit);
+  const products = useUnit($products);
+  const nextPageEvent = useUnit(nextPage);
+  const updateProducts = useUnit(updateProductsFx);
+  const isLoading = useUnit(updateProductsFx.pending);
 
-  // When changing the category, clear products, set the current page number to 0
   useEffect(() => {
-    setCurrentPage(0);
-    dispatch(clearProducts());
-    dispatch(setProductsLoading(true));
-  }, [searchTerm, currentCategory, dispatch]);
-
-  // If isLoading = true loads the items.
-  useEffect(() => {
-    if (isLoading && !isError) {
-      const queryParams = {
-        category: currentCategory,
-        searchTerm,
-        skip: currentPage * limit,
-      };
-
-      dispatch(getProducts(queryParams));
-    }
-  }, [currentCategory, currentPage, dispatch, isError, isLoading, limit, searchTerm]);
+    console.log("Loading", page);
+  }, [page]);
 
   // Loading products on view
   useEffect(() => {
-    if (inView) {
-      console.log("Loading", countRendersRef.current++);
-      setCurrentPage(prevState => prevState + 1);
-      dispatch(setProductsLoading(true));
-    }
-  }, [dispatch, inView]);
+    if (inView) nextPageEvent();
+  }, [inView, nextPageEvent]);
+
+  useEffect(() => {
+    updateProducts();
+  }, [updateProducts]);
 
   return (
     <main className={`${className ?? ""} text-center`}>
@@ -61,14 +44,15 @@ const Products = ({ className }: { className?: string }) => {
           const productRef = index === products.length - 1 && !isLoading ? setElement : null;
           return (
             <li className="max-w-full" ref={productRef} key={product.id}>
+              id={product.id}
               <ProductCard className="h-full py-5" product={product} />
             </li>
           );
         })}
         {isLoading && <ProductCardsSkeleton count={limit} />}
-        {!isLoading && !total && !isError && <p>Ничего не найдено, попробуйте изменить запрос.</p>}
+        {/* {!isLoading && !total && !isError && <p>Ничего не найдено, попробуйте изменить запрос.</p>} */}
       </ul>
-      {!isLoading && isError && <LoadMoreBtn />}
+      {/* {!isLoading && isError && <LoadMoreBtn />} */}
     </main>
   );
 };
