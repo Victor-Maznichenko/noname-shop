@@ -1,4 +1,7 @@
-import useSearch from "@utils/hooks/useSearch";
+import { useUnit } from "effector-react";
+import { ChangeEvent } from "react";
+
+import { $searchValue, clearSearchValue, updateSearchValue } from "@/effector/products";
 
 import CloseBtn from "@components/ui/Buttons/CloseBtn";
 import Icon from "@components/ui/Icon";
@@ -9,7 +12,16 @@ interface SearchProps {
 }
 
 const Search = ({ className, onClear }: SearchProps) => {
-  const { value, handleValue, clearValue } = useSearch(onClear);
+  const [searchValue, updateSearchValueFn] = useUnit([$searchValue, updateSearchValue]);
+
+  const handleChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
+    updateSearchValueFn(target.value);
+  };
+
+  const handleClear = () => {
+    onClear();
+    clearSearchValue();
+  };
 
   return (
     <form
@@ -29,14 +41,14 @@ const Search = ({ className, onClear }: SearchProps) => {
         type="search"
         name="search"
         placeholder="Search..."
-        value={value}
+        value={searchValue}
         minLength={3}
         autoComplete="off"
         maxLength={220}
-        onChange={handleValue}
+        onChange={handleChange}
         className="w-full pl-1 pr-4"
       />
-      <CloseBtn onClick={clearValue} />
+      <CloseBtn onClick={handleClear} />
     </form>
   );
 };

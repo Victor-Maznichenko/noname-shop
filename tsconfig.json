@@ -27,7 +27,6 @@
       "@components/*": ["src/components/*"],
       "@helpers": ["src/utils/helpers"],
       "@types": ["src/utils/types"],
-      "@redux/*": ["src/redux/*"],
       "@utils/*": ["src/utils/*"],
       "@/*": ["src/*"]
     }

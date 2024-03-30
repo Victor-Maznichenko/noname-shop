@@ -1,13 +1,14 @@
 {
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint/eslint-plugin", "prettier", "import", "react"],
+  "plugins": ["effector", "@typescript-eslint/eslint-plugin", "prettier", "import", "react"],
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
     "plugin:react-hooks/recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "plugin:effector/react"
   ],
   "settings": {
     "react": {
@@ -44,7 +45,6 @@
     "padded-blocks": ["error", "never"],
     "semi": ["error", "always"],
     "max-len": ["error", { "code": 120 }],
-    "indent": ["error", 2],
     "react/self-closing-comp": [
       "error",
       {

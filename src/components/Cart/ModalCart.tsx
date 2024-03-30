@@ -1,7 +1,7 @@
+import { useUnit } from "effector-react";
 import { useEffect } from "react";
 
-import { toggleIsOpenCart } from "@redux/reducers/cartReducer";
-import { useAppDispatch, useAppSelector } from "@redux/store";
+import { $isCartOpen, $productsCart, $totalPrice, closeCart } from "@/effector/cart";
 
 import CartItems from "@components/Cart/CartItems";
 import CartBtn from "@components/ui/Buttons/CartBtn";
@@ -9,9 +9,11 @@ import CloseBtn from "@components/ui/Buttons/CloseBtn";
 import Icon from "@components/ui/Icon";
 
 const ModalCart = () => {
-  const { products, totalPrice, isCartOpen } = useAppSelector(state => state.cart);
-  const dispatch = useAppDispatch();
-  const toggleCartActive = () => dispatch(toggleIsOpenCart());
+  const [productsCartObj, totalPrice, isCartOpen] = useUnit([$productsCart, $totalPrice, $isCartOpen]);
+  console.log(totalPrice);
+  const productsCart = Object.values(productsCartObj);
+
+  const handleClick = () => closeCart();
 
   useEffect(() => {
     if (isCartOpen) document.body.style.overflowY = "hidden";
@@ -34,15 +36,15 @@ const ModalCart = () => {
             <Icon className="mr-1 fill-blue-light" name="cart" width={17} height={15} />
             <span>Cart</span>
           </div>
-          <CloseBtn onClick={toggleCartActive} />
+          <CloseBtn onClick={handleClick} />
         </div>
-        <CartItems products={products} className="grow" />
+        <CartItems products={productsCart} className="grow" />
         <div className="mb-2 flex items-center justify-between">
-          <span className="text-xs">{products.length} positions</span>
+          <span className="text-xs">{productsCart.length} positions</span>
           <span className="text-xl text-gray-dark">${totalPrice}</span>
         </div>
-        {products.length === 0 ? (
-          <CartBtn onClick={toggleCartActive}>back to products</CartBtn>
+        {productsCart.length === 0 ? (
+          <CartBtn onClick={handleClick}>back to products</CartBtn>
         ) : (
           <CartBtn>place an order</CartBtn>
         )}

@@ -1,30 +1,20 @@
-import { memo, useState } from "react";
+import { ProductCartType } from "@types";
+import { useState } from "react";
 
-import {
-  decrementQuantityProduct,
-  incrementQuantityProduct,
-  removeFromCart,
-} from "@redux/reducers/cartReducer";
-import { useAppDispatch } from "@redux/store";
-import { ProductCartType } from "@utils/types/models";
+import { decrementQuantity, incrementQuantity, removeFromCart } from "@/effector/cart";
 
 import Counter from "@components/ui/Counter";
 import Icon from "@components/ui/Icon";
 
 const CartItem = ({ product }: { product: ProductCartType }) => {
-  const dispatch = useAppDispatch();
   const [isRemove, setIsRemove] = useState(false);
-  const incrementValue = () => dispatch(incrementQuantityProduct(product.id));
+  const incrementValue = () => incrementQuantity(product.id);
   const decrementValue = () => {
-    if (product.quantity > 1) {
-      dispatch(decrementQuantityProduct(product.id));
-    } else {
+    if (product.quantity === 1) {
       setIsRemove(true);
-      setTimeout(() => {
-        dispatch(removeFromCart(product.id));
-        setIsRemove(false);
-      }, 600);
+      setTimeout(() => removeFromCart(product.id), 650);
     }
+    decrementQuantity(product.id);
   };
 
   return (
@@ -47,4 +37,4 @@ const CartItem = ({ product }: { product: ProductCartType }) => {
   );
 };
 
-export default memo(CartItem);
+export default CartItem;
