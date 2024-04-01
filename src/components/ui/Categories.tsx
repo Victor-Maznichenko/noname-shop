@@ -1,15 +1,37 @@
+import { useUnit } from "effector-react";
+import { useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { FreeMode, Mousewheel } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import "swiper/css";
-import useCategories from "@utils/hooks/useCategories";
-import useCurrentCategory from "@utils/hooks/useCurrentCategory";
+import { CategoriesSkeleton } from "@/components/ui/Skeletons";
+import { $categories, $currentCategory, changeCurrentCategory, getCategoriesFx } from "@/effector/categories";
 
-import { CategoriesSkeleton } from "./Skeletons";
+import "swiper/css";
 
 const Categories = () => {
-  const { isLoading, categories } = useCategories();
-  const { currentCategory, changeCurrentCategory } = useCurrentCategory();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [categories, currentCategory, getCategoriesEffect, isLoading] = useUnit([
+    $categories,
+    $currentCategory,
+    getCategoriesFx,
+    getCategoriesFx.pending,
+  ]);
+
+  const handleClick = (category: string) => {
+    changeCurrentCategory(category);
+    setSearchParams({ category });
+  };
+
+  console.log(searchParams, currentCategory);
+
+  useEffect(() => {
+    changeCurrentCategory(searchParams.get("category") ?? "all");
+  }, [searchParams]);
+
+  useEffect(() => {
+    getCategoriesEffect();
+  }, [getCategoriesEffect]);
 
   return (
     <>
@@ -34,7 +56,7 @@ const Categories = () => {
                 className={`${activeClass} cursor-pointer px-2 py-[0.31rem] transition-all duration-300 hover:bg-blue-light/60 hover:text-white`}
                 key={category}
                 style={{ width: "auto" }}
-                onClick={() => changeCurrentCategory(category)}
+                onClick={() => handleClick(category)}
               >
                 <button className="pointer-events-none block text-m" type="button">
                   {category}

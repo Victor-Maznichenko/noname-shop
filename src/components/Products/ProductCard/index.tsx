@@ -1,8 +1,7 @@
-import { memo, useState } from "react";
+import { forwardRef, HTMLAttributes, useState } from "react";
 
+import { addToCart } from "@/effector/cart";
 import { calculateOldPrice } from "@helpers";
-import { addToCart } from "@redux/reducers/cartReducer";
-import { useAppDispatch } from "@redux/store";
 import { ProductType } from "@utils/types/models";
 
 import CartBtn from "@components/ui/Buttons/CartBtn";
@@ -14,21 +13,24 @@ import Rating from "./Rating";
 import Sale from "./Sale";
 import ShortDescription from "./ShortDescription";
 
-interface ProductCardProps {
+interface Props extends HTMLAttributes<HTMLDivElement> {
   product: ProductType;
-  className: string;
 }
 
-const ProductCard = ({ product, className }: ProductCardProps) => {
-  const dispatch = useAppDispatch();
+const ProductCard = forwardRef<HTMLDivElement | null, Props>(function ProductCard(
+  { product, className },
+  ref
+) {
+  // const dispatch = useAppDispatch();
   const [modalActive, setModalActive] = useState(false);
   const toggleModalActive = () => setModalActive(!modalActive);
-  const handleClick = () => dispatch(addToCart(product));
+  const handleClick = () => addToCart(product);
 
   return (
     <div
       // eslint-disable-next-line max-len
-      className={`${className ?? ""} flex h-full flex-col justify-between bg-gray-light p-1 text-s text-gray-dark sm:p-4`}
+      className={`${className} flex h-full flex-col justify-between bg-gray-light p-1 text-s text-gray-dark sm:p-4`}
+      ref={ref}
     >
       <div className="relative">
         <Sale discountPercentage={product.discountPercentage} />
@@ -55,6 +57,6 @@ const ProductCard = ({ product, className }: ProductCardProps) => {
       </div>
     </div>
   );
-};
+});
 
-export default memo(ProductCard);
+export default ProductCard;
