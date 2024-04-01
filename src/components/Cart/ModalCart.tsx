@@ -1,7 +1,8 @@
 import { useUnit } from "effector-react";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 
-import { $isCartOpen, $productsCart, $totalPrice, closeCart } from "@/effector/cart";
+import { modalActions, ModalContext } from "@/contexts/isModalOpen";
+import { $productsCart, $totalPrice } from "@/effector/cart";
 
 import CartItems from "@components/Cart/CartItems";
 import CartBtn from "@components/ui/Buttons/CartBtn";
@@ -9,11 +10,13 @@ import CloseBtn from "@components/ui/Buttons/CloseBtn";
 import Icon from "@components/ui/Icon";
 
 const ModalCart = () => {
-  const [productsCartObj, totalPrice, isCartOpen] = useUnit([$productsCart, $totalPrice, $isCartOpen]);
-  console.log(totalPrice);
+  const [productsCartObj, totalPrice] = useUnit([$productsCart, $totalPrice]);
   const productsCart = Object.values(productsCartObj);
+  const isCartOpen = useContext(ModalContext);
 
-  const handleClick = () => closeCart();
+  const handleClick = () => {
+    if (modalActions) modalActions.toggleModal();
+  };
 
   useEffect(() => {
     if (isCartOpen) document.body.style.overflowY = "hidden";

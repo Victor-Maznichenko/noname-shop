@@ -1,16 +1,20 @@
 import { useUnit } from "effector-react";
 
-import { $productsCart, openCart } from "@/effector/cart";
+import { modalActions } from "@/contexts/isModalOpen";
+import { $productsCart } from "@/effector/cart";
 
 import Icon from "@components/ui/Icon";
 
 const Cart = () => {
   const productsCart = Object.values(useUnit($productsCart));
+  const handleClick = () => {
+    if (modalActions) modalActions.toggleModal();
+  };
 
   return (
     <div>
       <button
-        onClick={() => openCart()}
+        onClick={handleClick}
         // eslint-disable-next-line max-len
         className={`${productsCart.length ? "bg-blue-light text-white" : "bg-white text-blue-light"} relative flex items-center rounded p-1.5 text-m lowercase transition-all`}
         type="button"
