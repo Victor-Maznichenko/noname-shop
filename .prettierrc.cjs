@@ -14,5 +14,6 @@ module.exports = {
    trailingComma: "es5",
    tabWidth: 2,
    tailwindConfig: "./tailwind.config.js",
-   plugins: ["prettier-plugin-tailwindcss"]
+   plugins: ["prettier-plugin-tailwindcss"],
+   tailwindFunctions: ["clsx", "cn", "twmerge", "cva"],
 };

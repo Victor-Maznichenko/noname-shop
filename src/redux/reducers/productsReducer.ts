@@ -1,16 +1,16 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-import { ProductType, ProductsApiResponse, ProductsParamsType } from "@types";
+import { requests } from "@api";
 
-import { buildProductsUrl } from "@helpers";
-
-interface ProductsState extends ProductsApiResponse {
+interface ProductsState extends ProductsResponse {
+  page: number;
   isLoading: boolean;
   searchTerm: string;
   isError: boolean;
 }
 
 const initialState: ProductsState = {
+  page: 0,
   total: 0,
   limit: 10,
   products: [],
@@ -19,13 +19,16 @@ const initialState: ProductsState = {
   isLoading: true,
 };
 
+interface GetProductsParams {
+  limit?: number;
+  skip?: number;
+}
+
 export const getProducts = createAsyncThunk(
   "products/getProducts",
-  async (productParams: ProductsParamsType, thunkAPI) => {
+  async (productParams: GetProductsParams, thunkAPI) => {
     try {
-      const response = await fetch(buildProductsUrl(productParams));
-      const data = await response.json();
-      return data;
+      return await requests.getProducts(productParams);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -39,11 +42,19 @@ const productsSlice = createSlice({
     setProductsLoading: (state, action) => {
       state.isLoading = action.payload;
     },
-    clearProducts: state => {
+    resetProducts: state => {
+      state.page = 0;
+      state.total = 0;
       state.products = [];
+      state.isError = false;
+      state.isLoading = true;
     },
     setSearchTerm: (state, action) => {
       state.searchTerm = action.payload;
+    },
+    nextPage: state => {
+      state.page += 1;
+      state.isLoading = true;
     },
   },
   extraReducers(builder) {
@@ -53,7 +64,7 @@ const productsSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(getProducts.fulfilled, (state, { payload }) => {
-        const newProducts = payload.products.filter((newProduct: ProductType) =>
+        const newProducts = payload.products.filter((newProduct: Product) =>
           state.products.length > 0 ? !state.products.some(product => product.id === newProduct.id) : true
         );
         state.products = [...state.products, ...newProducts];
@@ -68,5 +79,5 @@ const productsSlice = createSlice({
   },
 });
 
-export const { setProductsLoading, setSearchTerm, clearProducts } = productsSlice.actions;
+export const { setProductsLoading, setSearchTerm, nextPage, resetProducts } = productsSlice.actions;
 export default productsSlice.reducer;

@@ -26,12 +26,12 @@
       "@styles/*": ["src/assets/styles/*"],
       "@components/*": ["src/components/*"],
       "@helpers": ["src/utils/helpers"],
-      "@types": ["src/utils/types"],
+      "@hooks": ["src/utils/hooks"],
+      "@api": ["src/utils/api"],
       "@redux/*": ["src/redux/*"],
-      "@utils/*": ["src/utils/*"],
       "@/*": ["src/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "@types"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

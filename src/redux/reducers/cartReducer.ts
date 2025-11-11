@@ -1,11 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { ProductCartType } from "@types";
-
-import { isUndefined } from "@helpers";
-
 interface CartStateType {
-  products: Array<ProductCartType>;
+  products: Array<ProductCart>;
   totalPrice: number;
   isCartOpen: boolean;
 }
@@ -22,51 +18,63 @@ const cartSlice = createSlice({
   reducers: {
     addToCart: (state, { payload }) => {
       const { id, title, price, discountPercentage, thumbnail } = payload;
-      const productFound = state.products.find(product => product.id === id);
+      const productFound = state.products.find(p => p.id === id);
 
-      if (productFound) {
-        if (productFound.quantity < productFound.total) {
-          state.totalPrice += productFound.price;
-          productFound.quantity++;
-        }
-      } else {
+      if (!productFound) {
         const productCart = {
           quantity: 1,
           total: 30,
           id,
           title,
           price,
-          discountPercentage,
-          discountedPrice: price * (discountPercentage / 100),
           thumbnail,
+          discountPercentage,
         };
+
         state.totalPrice += price;
         state.products = [...state.products, productCart];
+        return;
+      }
+
+      if (productFound.quantity < productFound.total) {
+        state.totalPrice += productFound.price;
+        productFound.quantity++;
       }
     },
+
     incrementQuantityProduct: (state, { payload }) => {
       const productFound = state.products.find(product => product.id === payload);
+
       if (productFound && productFound.quantity < productFound.total) {
         state.totalPrice += productFound.price;
         productFound.quantity++;
       }
     },
+
     decrementQuantityProduct: (state, { payload }) => {
       const productFound = state.products.find(product => product.id === payload);
+
       if (productFound && productFound.quantity > 1 && state.totalPrice > 0) {
         state.totalPrice -= productFound.price;
         productFound.quantity--;
       }
     },
+
     removeFromCart: (state, { payload }) => {
       const indexProductFound = state.products.findIndex(product => product.id === payload);
-      if (!isUndefined(indexProductFound)) {
+
+      if (indexProductFound !== -1) {
         state.totalPrice -= state.products[indexProductFound].price;
         state.products.splice(indexProductFound, 1);
       }
     },
-    toggleIsOpenCart: state => {
-      state.isCartOpen = !state.isCartOpen;
+
+    setCartOpen: state => {
+      state.isCartOpen = true;
+    },
+
+    setCartClose: state => {
+      state.isCartOpen = false;
     },
   },
 });
@@ -74,8 +82,9 @@ const cartSlice = createSlice({
 export default cartSlice.reducer;
 export const {
   addToCart,
+  setCartOpen,
+  setCartClose,
   removeFromCart,
-  toggleIsOpenCart,
   incrementQuantityProduct,
   decrementQuantityProduct,
 } = cartSlice.actions;

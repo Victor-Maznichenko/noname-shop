@@ -5,7 +5,7 @@
 <table width='100%'>
   <tr>
       <td align="center" width="110" height="90">
-         <img src="https://i.ibb.co/MB4fxFC/react.png" width="36" height="36" alt="React" />
+         <img src="https://react.dev/favicon-32x32.png" width="36" height="36" alt="React" />
          <br>React
       </td>
       <td align="center" width="110" height="90">
@@ -41,7 +41,6 @@
 
 #### Обоснование выбора таких технологий:
 
--  Я решил писать без Next.js на чистом React, хотя для интернет-магазинов SEO важеная составляющая, он под капотом оптимизирует шрифты изображения и скрипты. Но все же для такого небольшого тестового задания мне захотелось использовать React.
 -  Redux Toolkit для создания централизованного хранилища состояния доступного из любого компонента.
 -  Redux Persist для упрощения работы с localstorage
 -  TailwindCSS для ускорения разработки и чтобы показать что я знаю эту технологию =).

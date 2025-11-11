@@ -1,19 +1,11 @@
-import { Route, Routes } from "react-router-dom";
+import { Footer, Header, ModalCart } from "./modules";
+import { Products } from "./pages";
 
-import ModalCart from "@components/Cart/ModalCart";
-import Footer from "@components/Footer";
-import Header from "@components/Header";
-import Products from "@components/Products";
-
-const App = () => (
+export const App = () => (
   <div className="flex min-h-screen flex-col gap-y-px text-gray-main">
     <Header />
+    <Products className="grow" />
     <ModalCart />
-    <Routes>
-      <Route index element={<Products className="grow" />} />
-    </Routes>
     <Footer />
   </div>
 );
-
-export default App;

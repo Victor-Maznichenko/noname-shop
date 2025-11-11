@@ -1,44 +1,44 @@
-import useSearch from "@utils/hooks/useSearch";
+import { ChangeEventHandler } from "react";
 
-import CloseBtn from "@components/ui/Buttons/CloseBtn";
-import Icon from "@components/ui/Icon";
+import { cn } from "@helpers";
+
+import { Button } from "./Button";
+import { Icons } from "./Icons";
 
 interface SearchProps {
   className: string;
+  onChange: ChangeEventHandler<HTMLInputElement> | undefined;
   onClear: () => void;
+  value: string;
 }
 
-const Search = ({ className, onClear }: SearchProps) => {
-  const { value, handleValue, clearValue } = useSearch(onClear);
+export const Search = ({ className, value, onChange, onClear }: SearchProps) => (
+  <form
+    className={cn(
+      `border-1 flex h-7 items-center overflow-hidden rounded border border-transparent bg-white pr-2 text-m
+      text-gray-main invalid:border-red`,
+      className
+    )}
+    onSubmit={event => event.preventDefault()}
+  >
+    <Button className="text-gray-main" variant="filled-sm-white-rounded" aria-label="Search button">
+      <Icons.Search />
+    </Button>
 
-  return (
-    <form
-      // eslint-disable-next-line max-len
-      className={`${className ?? ""} border-1 flex h-7 items-center rounded border border-transparent bg-white pr-2 text-m text-gray-main invalid:border-red`}
-      onSubmit={event => event.preventDefault()}
-    >
-      <button
-        className="flex h-full w-7 items-center justify-center"
-        name="searchBtn"
-        aria-label="Search button"
-        type="button"
-      >
-        <Icon className="fill-gray-main" name="search" width={17} height={17} />
-      </button>
-      <input
-        type="search"
-        name="search"
-        placeholder="Search..."
-        value={value}
-        minLength={3}
-        autoComplete="off"
-        maxLength={220}
-        onChange={handleValue}
-        className="w-full pl-1 pr-4"
-      />
-      <CloseBtn onClick={clearValue} />
-    </form>
-  );
-};
+    <input
+      type="search"
+      name="search"
+      placeholder="Search..."
+      value={value}
+      minLength={3}
+      autoComplete="off"
+      maxLength={220}
+      onChange={onChange}
+      className="w-full pl-1 pr-4"
+    />
 
-export default Search;
+    <Button variant="unstyled" onClick={onClear}>
+      <Icons.Close />
+    </Button>
+  </form>
+);

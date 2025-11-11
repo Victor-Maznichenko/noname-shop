@@ -1,4 +1,5 @@
-import Icon from "@components/ui/Icon";
+import { Button } from "./Button";
+import { Icons } from "./Icons";
 
 interface CounterProps {
   value?: number;
@@ -6,16 +7,14 @@ interface CounterProps {
   decrementValue?: () => void;
 }
 
-const Counter = ({ value = 0, incrementValue, decrementValue }: CounterProps) => (
+export const Counter = ({ value = 0, incrementValue, decrementValue }: CounterProps) => (
   <div className="text inline-flex items-center rounded bg-gray-light text-xs leading-none">
-    <button className="px-2 py-3" onClick={decrementValue} type="button">
-      <Icon width={10} height={2} name="minus" />
-    </button>
+    <Button className="px-2 py-3" onClick={decrementValue} variant="unstyled">
+      <Icons.Minus />
+    </Button>
     <span className="w-6 text-center">{value}</span>
-    <button className="px-2 py-3" onClick={incrementValue} type="button">
-      <Icon width={10} height={10} name="plus" />
-    </button>
+    <Button className="px-2 py-3" onClick={incrementValue} variant="unstyled">
+      <Icons.Plus />
+    </Button>
   </div>
 );
-
-export default Counter;
